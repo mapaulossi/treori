@@ -578,9 +578,9 @@ theme.functions.productListActions = function(){
         let id = $(this).attr('class').split(' ')[1].replace('prod-id-','').trim();
         let url = $(this).find('.info-produto > a:first-child').attr('href');        
         let block = $('<div id="theme_list-functions"></div>');
-        // if(hasVariants){
+        if(hasVariants){
             block.append($('<a href="/carrinho/produto/'+ id +'/adicionar" class="theme_buttonBuy-ajax">'+ theme.icon.cart +'<span>'+ theme.lang.productListAdd +'</span></a>'));
-        // }        
+        }        
         block.append($('<a href="'+ url +'">'+ theme.icon.seeMore +'<span>'+ theme.lang.productListDetail +'</span></a>'));
         $(this).find('.imagem-produto').prepend(block);        
     });
