@@ -356,7 +356,9 @@ theme.build.account = function(template){
         menu.append('<li><a href="/conta/logout">Sair</a></li>');
     }else{
         //menu.append('<li><a href="">Login</a></li>');
-        menu.append('<li><form id="apx_sideLogin" action="/conta/login" method="post"><label>E-mail<input id="id_email" maxlength="128" name="email" type="text"></label><label>Senha<input id="id_senha" maxlength="32" name="senha" type="password"></label><div><button type="submit" class="botao principal">Entrar</button><a data-toggle="modal"> <i class="icon-lock cor-secundaria"></i> Esqueceu a senha? </a></div></form></li>');
+        //menu.append('<li><form id="apx_sideLogin" action="/conta/login" method="post"><label>E-mail<input id="id_email" maxlength="128" name="email" type="text"></label><label>Senha<input id="id_senha" maxlength="32" name="senha" type="password"></label><div><button type="submit" class="botao principal">Entrar</button><a data-toggle="modal"> <i class="icon-lock cor-secundaria"></i> Esqueceu a senha? </a></div></form></li>');
+        //Adicionar class e href esqueceu a senha
+        menu.append('<li><form id="apx_sideLogin" action="/conta/login" method="post"><label>E-mail<input id="id_email" maxlength="128" name="email" type="text"></label><label>Senha<input id="id_senha" maxlength="32" name="senha" type="password"></label><div><button type="submit" class="botao principal">Entrar</button><a href="#modalRecuperarSenha" data-toggle="modal" data-target="#modalRecuperarSenha" class="recuperar-senha"> <i class="icon-lock cor-secundaria"></i> Esqueceu a senha? </a></div></form></li>');
         menu.append('<li><a href="/conta/criar?next=conta_index&email=_">Cliente novo? Cadastre-se</a></li>');
     }
     menu.append('<li class="divider"></li>');
@@ -578,9 +580,9 @@ theme.functions.productListActions = function(){
         let id = $(this).attr('class').split(' ')[1].replace('prod-id-','').trim();
         let url = $(this).find('.info-produto > a:first-child').attr('href');        
         let block = $('<div id="theme_list-functions"></div>');
-        if(hasVariants){
+        // if(hasVariants){
             block.append($('<a href="/carrinho/produto/'+ id +'/adicionar" class="theme_buttonBuy-ajax">'+ theme.icon.cart +'<span>'+ theme.lang.productListAdd +'</span></a>'));
-        }        
+        // }        
         block.append($('<a href="'+ url +'">'+ theme.icon.seeMore +'<span>'+ theme.lang.productListDetail +'</span></a>'));
         $(this).find('.imagem-produto').prepend(block);        
     });
@@ -665,7 +667,14 @@ theme.functions.sideCartSet = function(){
         })
     });
     //$('body').append('<div id="theme_sideCart-shadow"></div><div id="theme_sideCart"><div id="theme_sideCart-header"><button type="button" onclick="theme.functions.sideCartToggle()">'+ theme.icon.sideCartClose +'</button><span>'+ theme.lang.sideCartTitle +'</span></div><div id="theme_sideCart-content"></div><div id="theme_sideCart-footer"><a href="/carrinho/index" class="botao">Finalizar Compra</div></div></div>');    
-    $('body').append('<div id="theme_sideCart" class="theme_aside right"><div class="theme_aside-header" id="theme_sideCart-header"><button type="button" onclick="theme.functions.sideCartToggle()">'+ theme.icon.sideCartClose +'</button><span>'+ theme.lang.sideCartTitle +'</span></div><div id="theme_sideCart-content"></div><div id="theme_sideCart-footer"><a href="/carrinho/index" class="botao principal botao-comprar">Finalizar Compra</div></div></div>');    
+    //$('body').append('<div id="theme_sideCart" class="theme_aside right"><div class="theme_aside-header" id="theme_sideCart-header"><button type="button" onclick="theme.functions.sideCartToggle()">'+ theme.icon.sideCartClose +'</button><span>'+ theme.lang.sideCartTitle +'</span></div><div id="theme_sideCart-content"></div><div id="theme_sideCart-footer"><a href="/carrinho/index" class="botao principal botao-comprar">Finalizar Compra</div></div></div>');    
+
+    //Minhas alteracores carrinho
+    $('body').append('<div id="theme_sideCart" class="theme_aside right"><div class="theme_aside-header" ><button type="button" class="cart-trigger">'+ theme.icon.sideCartClose +'</button><span>'+ theme.lang.sideCartTitle +'</span></div><div id="theme_sideCart-content"></div><div id="theme_sideCart-footer"><a href="/carrinho/index" class="botao principal botao-comprar">Finalizar Compra</div></div></div>');    
+
+    $('.cart-trigger').click(function(){   
+        $('body').toggleClass('sideCart-visible');         
+    });
 }
 theme.functions.sideCart = function(){
     //$('#theme_sideCart-content').html(html);
